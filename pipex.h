@@ -6,7 +6,7 @@
 /*   By: ppajot <ppajot@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/20 20:09:03 by ppajot            #+#    #+#             */
-/*   Updated: 2022/06/22 20:47:24 by ppajot           ###   ########.fr       */
+/*   Updated: 2022/06/22 21:03:38 by ppajot           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,7 +33,7 @@ typedef struct s_data
 	int		fd2;
 	int		cmd_nbr;
 	t_cmd	*cmd_array;
-	int		*pfd[2];
+	int		**pfd;
 }	t_data;
 
 
@@ -43,10 +43,9 @@ char	**ft_split(char const *s, char c);
 
 void	free_array(char **array);
 
-int			ft_printf(const char *format, ...);
+int		ft_printf(const char *format, ...);
 
 char	*get_path(char *cmd);
 
-char	**fill_av(char *str, char **cmd);
 
 #endif

@@ -10,7 +10,7 @@ INC := pipex.h
 LIBFT := libft/libft.a
 
 CC := gcc
-FLAGS := -Wall -Wextra -Werror
+FLAGS := -Wall -Wextra -Werror -g
 
 all : $(NAME)
 
@@ -20,7 +20,7 @@ all : $(NAME)
 
 
 $(NAME) : $(OBJ) $(LIBFT)
-	$(CC) $(OBJ) -o $(NAME) $(LIBFT)
+	$(CC) -g $(OBJ) -o $(NAME) $(LIBFT)
 
 
 clean:

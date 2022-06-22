@@ -1,4 +1,4 @@
-SRCS_ := main.c
+SRCS_ := main.c  get_path.c
 SRCS := $(patsubst %,srcs/%,$(SRCS_))
 
 OBJ := $(patsubst %.c,%.o,$(SRCS))

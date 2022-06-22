@@ -6,7 +6,7 @@
 /*   By: ppajot <ppajot@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/03 15:51:21 by ppajot            #+#    #+#             */
-/*   Updated: 2022/06/17 21:44:44 by ppajot           ###   ########.fr       */
+/*   Updated: 2022/06/22 18:24:45 by ppajot           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,7 +52,9 @@ void		ft_putnbr(long i, char convert, int *count);
 void		ft_flags(char **str, t_flags *flags);
 const char	*ft_put(va_list arg, const char *format,
 				t_flags *flags, int *count);
+				
 int			ft_printf(const char *format, ...);
+
 long		ft_convert(long l, char convert);
 void		setflags(t_flags *flags);
 int			atoi_move(char **str);
@@ -111,5 +113,6 @@ void		pushback(char currentl[BUFFER_SIZE + 1],
 				char line[BUFFER_SIZE + 1], int newbegin);
 int			read_endbuff(int fd, char buff[BUFFER_SIZE + 1]);
 char		*free_res(char *result);
+void		free_array(char **array);
 
 #endif

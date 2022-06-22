@@ -6,13 +6,13 @@
 /*   By: ppajot <ppajot@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/20 20:01:04 by ppajot            #+#    #+#             */
-/*   Updated: 2022/06/21 19:31:19 by ppajot           ###   ########.fr       */
+/*   Updated: 2022/06/22 20:48:43 by ppajot           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../pipex.h"
 
-void	run_cmd1(int pfd[], int fd1, char *str1, char *new_av[])
+void	run_cmd_in(int pfd[], int fd1, char *str1, char *new_av[])
 {
 	int	cpid = fork();
 
@@ -26,7 +26,7 @@ void	run_cmd1(int pfd[], int fd1, char *str1, char *new_av[])
 	
 }
 
-void	run_cmd2(int pfd[], int fd2, char *str2, char *new_av2[])
+void	run_cmd_out(int pfd[], int fd2, char *str2, char *new_av2[])
 {
 	int	cpid = fork();
 	
@@ -41,31 +41,26 @@ void	run_cmd2(int pfd[], int fd2, char *str2, char *new_av2[])
 
 int	main(int ac, char **av)
 {
-	if (ac != 5)
+	t_data	data;
+	int		i;
+	
+	if (ac < 5)
 		return (0);
-	char *new_av[] = {0, 0, 0};
-	char *new_av2[] = {0, 0, 0};
-	char *str1;
-	char *str2;
-	char **cmd1;
-	char **cmd2;
 	
-	cmd1 = ft_split(av[2], ' ');
-	cmd2 = ft_split(av[3], ' ');
-	str1 = ft_strjoin("/bin/", cmd1[0]);
-	str2 = ft_strjoin("/bin/", cmd2[0]);
+	data.cmd_nbr = ac - 3;
+	data.cmd_array = malloc(sizeof(t_cmd) * data.cmd_nbr);
+	i = 0;
+	while (i < data.cmd_nbr)
+	{
+		data.cmd_array[i].av = ft_split(av[i + 2], ' ');
+		data.cmd_array[i].path = get_path(data.cmd_array[i].av[0]);
+		data.cmd_array[i].av[0] = data.cmd_array[i].path;
+	}
+	data.fd1 = open (av[1], 0);
+	data.fd2 = open(av[4], O_RDWR | O_CREAT | O_TRUNC, 00777);
+	data.pfd = (int *)malloc(sizeof(int[2]) * data.cmd_nbr - 1);
 	
-	
-	int	pfd[2];
 	pipe(pfd);
-	int	fd1;
-	fd1 = open (av[1], 0);
-	int fd2;
-	fd2 = open(av[4], O_RDWR | O_CREAT | O_TRUNC, 00777);
-	new_av[0] = str1;
-	new_av[1] = cmd1[1];
-	new_av2[0] = str2;
-	new_av2[1] = cmd2[1];
 	run_cmd1(pfd, fd1, str1, new_av);
 	run_cmd2(pfd, fd2, str2, new_av2);
 	close (pfd[0]);

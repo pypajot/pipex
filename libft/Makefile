@@ -7,7 +7,7 @@ ft_printf_utils.c   ft_printf_utils2.c   ft_printf_utils3.c   ft_strcmp.c \
 ft_lstadd_back.c ft_lstadd_front.c  ft_lstclear.c \
 ft_lstdelone.c  ft_lstiter.c  ft_lstlast.c \
 ft_lstmap.c     ft_lstnew.c   ft_lstsize.c \
-get_next_line.c get_next_line_utils.c
+get_next_line.c get_next_line_utils.c free_array.c
 
 OBJ := $(patsubst %.c,%.o,$(SRC))
 

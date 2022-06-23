@@ -6,7 +6,7 @@
 /*   By: ppajot <ppajot@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/20 20:09:03 by ppajot            #+#    #+#             */
-/*   Updated: 2022/06/22 21:03:38 by ppajot           ###   ########.fr       */
+/*   Updated: 2022/06/23 18:40:04 by ppajot           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,10 +15,11 @@
 
 # include <unistd.h>
 # include <stdlib.h>
+# include <stdio.h>
 # include <fcntl.h>
 # include <sys/wait.h>
-
-# define BUFFER_SIZE 1
+# include <errno.h>
+# include <string.h>
 
 typedef struct s_cmd
 {
@@ -47,5 +48,12 @@ int		ft_printf(const char *format, ...);
 
 char	*get_path(char *cmd);
 
+void	run_all_cmd(t_data data);
+
+void	init_data(t_data *data, int ac, char **av);
+
+void	free_data(t_data data);
+
+void	close_all_fd(t_data data);
 
 #endif

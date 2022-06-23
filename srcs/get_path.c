@@ -6,7 +6,7 @@
 /*   By: ppajot <ppajot@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/22 17:48:32 by ppajot            #+#    #+#             */
-/*   Updated: 2022/06/22 18:47:06 by ppajot           ###   ########.fr       */
+/*   Updated: 2022/06/23 18:31:04 by ppajot           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,7 +51,7 @@ char	*get_path(char *cmd)
 	if (!is_command(cmd))
 	{
 		if (access(cmd, F_OK) == 0)
-			return (cmd);
+			return (ft_strdup(cmd));
 		else
 			exit (0);
 	}

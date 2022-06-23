@@ -1,10 +1,7 @@
+#include <unistd.h>
 int main()
 {
-	int	tab[2];
-	int i;
-
-	i = -1;
-	while (++i < 5)
-		tab[i] = i;
-	return (0);
+	int i = 0;
+	int	test[1];
+	test[++i] = 0;
 }

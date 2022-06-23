@@ -1,26 +1,29 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   main.c                                             :+:      :+:    :+:   */
+/*   free_data.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: ppajot <ppajot@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/06/20 20:01:04 by ppajot            #+#    #+#             */
-/*   Updated: 2022/06/23 18:05:23 by ppajot           ###   ########.fr       */
+/*   Created: 2022/06/23 17:52:49 by ppajot            #+#    #+#             */
+/*   Updated: 2022/06/23 17:53:59 by ppajot           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../pipex.h"
 
-int	main(int ac, char **av)
+void	free_data(t_data data)
 {
-	t_data	data;
+	int	i;
 	
-	if (ac < 5)
-		return (0);
-	init_data(&data, ac, av);	
-	run_all_cmd(data);
-	close_all_fd(data);
-	free_data(data);
-	exit (0);
+	i = 0;
+	while (i < data.cmd_nbr)
+	{
+		free_array(data.cmd_array[i].av);
+		if (i != data.cmd_nbr - 1)
+			free(data.pfd[i]);
+		i++;	
+	}
+	free(data.pfd);
+	free(data.cmd_array);
 }

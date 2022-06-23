@@ -1,1 +1,10 @@
-ab
+Makefile
+a.out
+libft
+objs
+pipex
+pipex.h
+segfault.c
+srcs
+test
+test2

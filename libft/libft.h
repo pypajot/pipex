@@ -6,7 +6,7 @@
 /*   By: ppajot <ppajot@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/03 15:51:21 by ppajot            #+#    #+#             */
-/*   Updated: 2022/06/22 18:24:45 by ppajot           ###   ########.fr       */
+/*   Updated: 2022/06/23 19:48:05 by ppajot           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -107,7 +107,9 @@ char		*cat_alloc(char newend[BUFFER_SIZE + 1], char *oldres, int size);
 int			nextendl(char line[BUFFER_SIZE + 1]);
 int			checkendl(char currentl[BUFFER_SIZE + 1],
 				char line[BUFFER_SIZE + 1], char **result);
+
 char		*get_next_line(int fd);
+
 char		*initres(void);
 void		pushback(char currentl[BUFFER_SIZE + 1],
 				char line[BUFFER_SIZE + 1], int newbegin);

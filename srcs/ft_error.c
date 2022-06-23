@@ -1,28 +1,22 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   close_all_fd.c                                     :+:      :+:    :+:   */
+/*   ft_error.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: ppajot <ppajot@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/06/23 17:49:08 by ppajot            #+#    #+#             */
-/*   Updated: 2022/06/23 20:00:21 by ppajot           ###   ########.fr       */
+/*   Created: 2022/06/23 19:05:14 by ppajot            #+#    #+#             */
+/*   Updated: 2022/06/23 19:11:09 by ppajot           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../pipex.h"
 
-void	close_all_fd(t_data data)
+char	*ft_error(int err, char *str)
 {
-	int	i;
-
-	i = -1;
-	while (++i < data.cmd_nbr - 1 + data.hd)
-	{
-		close(data.pfd[i][0]);
-		close(data.pfd[i][1]);
-	}
-	if (!data.hd)
-		close(data.fd1);
-	close(data.fd2);
+	if (err == CMD_NOT_FOUND)
+		ft_printf("command not found: %s\n", str);
+	if (err == NO_SUCH_FILE)
+		ft_printf("No such file or directory: %s\n", str);
+	return (0);
 }

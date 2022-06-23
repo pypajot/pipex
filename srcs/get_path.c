@@ -6,7 +6,7 @@
 /*   By: ppajot <ppajot@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/22 17:48:32 by ppajot            #+#    #+#             */
-/*   Updated: 2022/06/23 18:31:04 by ppajot           ###   ########.fr       */
+/*   Updated: 2022/06/23 21:25:24 by ppajot           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,22 +50,22 @@ char	*get_path(char *cmd)
 	
 	if (!is_command(cmd))
 	{
-		if (access(cmd, F_OK) == 0)
+		if (access(cmd, X_OK) == 0)
 			return (ft_strdup(cmd));
 		else
-			exit (0);
+			return (ft_error(NO_SUCH_FILE, cmd));
 	}
 	i = -1;
 	path_array = path_init();
 	while (++i < 10)
 	{
 		path = ft_strjoin(path_array[i], cmd);
-		if (access(path, F_OK) == 0)
+		if (access(path, X_OK) == 0)
 			break ;
 		free(path);
 	}
 	free_array(path_array);
 	if (i == 10)
-		exit (0);
+		return (ft_error(CMD_NOT_FOUND, cmd));
 	return (path);
 }

@@ -6,7 +6,7 @@
 /*   By: ppajot <ppajot@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/22 17:48:32 by ppajot            #+#    #+#             */
-/*   Updated: 2022/06/23 21:25:24 by ppajot           ###   ########.fr       */
+/*   Updated: 2022/06/23 21:50:45 by ppajot           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,8 +25,8 @@ static int	is_command(char *cmd)
 
 static char	**path_init(void)
 {
-	char **path_array;
-	
+	char	**path_array;
+
 	path_array = (char **)malloc(11 * sizeof(char *));
 	path_array[0] = ft_strdup("/mnt/nfs/homes/ppajot/bin/");
 	path_array[1] = ft_strdup("/usr/local/sbin/");
@@ -47,7 +47,7 @@ char	*get_path(char *cmd)
 	char	**path_array;
 	char	*path;
 	int		i;
-	
+
 	if (!is_command(cmd))
 	{
 		if (access(cmd, X_OK) == 0)

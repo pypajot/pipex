@@ -6,7 +6,7 @@
 /*   By: ppajot <ppajot@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/23 17:50:00 by ppajot            #+#    #+#             */
-/*   Updated: 2022/06/23 21:12:31 by ppajot           ###   ########.fr       */
+/*   Updated: 2022/06/23 21:52:03 by ppajot           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,7 @@ void	stdin_to_pipe(t_data data)
 {
 	int		newfd;
 	char	*str;
-	int 	cpid;
+	int		cpid;
 
 	cpid = fork();
 	if (cpid == 0)
@@ -39,7 +39,7 @@ void	stdin_to_pipe(t_data data)
 void	run_cmd_in(t_data data)
 {
 	int	cpid;
-	
+
 	cpid = fork();
 	if (cpid == 0)
 	{
@@ -57,8 +57,8 @@ void	run_cmd_in(t_data data)
 
 void	run_cmd_i(t_data data, int i)
 {
-	int	cpid; 
-	
+	int	cpid;
+
 	cpid = fork();
 	if (cpid == 0)
 	{
@@ -70,14 +70,15 @@ void	run_cmd_i(t_data data, int i)
 			free_data(data);
 			exit (0);
 		}
-		execve(data.cmd_array[i + 1 - data.hd].path, data.cmd_array[i + 1 - data.hd].av, 0);
+		execve(data.cmd_array[i + 1 - data.hd].path,
+			data.cmd_array[i + 1 - data.hd].av, 0);
 	}
 }
 
 void	run_cmd_out(t_data data, int i)
 {
 	int	cpid;
-	
+
 	cpid = fork();
 	if (cpid == 0)
 	{
@@ -89,14 +90,15 @@ void	run_cmd_out(t_data data, int i)
 			free_data(data);
 			exit (0);
 		}
-		execve(data.cmd_array[i + 1 - data.hd].path, data.cmd_array[i + 1 - data.hd].av, 0);
+		execve(data.cmd_array[i + 1 - data.hd].path,
+			data.cmd_array[i + 1 - data.hd].av, 0);
 	}
 }
 
 void	run_all_cmd(t_data data)
 {	
 	int	i;
-	
+
 	i = -1;
 	if (!data.hd)
 		run_cmd_in(data);

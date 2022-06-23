@@ -6,7 +6,7 @@
 /*   By: ppajot <ppajot@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/20 20:09:03 by ppajot            #+#    #+#             */
-/*   Updated: 2022/06/23 19:55:45 by ppajot           ###   ########.fr       */
+/*   Updated: 2022/06/23 21:49:57 by ppajot           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,7 +30,6 @@ typedef struct s_cmd
 	char	**av;
 }	t_cmd;
 
-
 typedef struct s_data
 {
 	int		fd1;
@@ -41,7 +40,6 @@ typedef struct s_data
 	t_cmd	*cmd_array;
 	int		**pfd;
 }	t_data;
-
 
 char	*ft_strdup(const char *s);
 char	*ft_strjoin(char const *s1, char const *s2);

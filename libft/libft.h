@@ -6,7 +6,7 @@
 /*   By: ppajot <ppajot@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/03 15:51:21 by ppajot            #+#    #+#             */
-/*   Updated: 2022/06/23 19:48:05 by ppajot           ###   ########.fr       */
+/*   Updated: 2022/06/23 21:49:38 by ppajot           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,7 +52,7 @@ void		ft_putnbr(long i, char convert, int *count);
 void		ft_flags(char **str, t_flags *flags);
 const char	*ft_put(va_list arg, const char *format,
 				t_flags *flags, int *count);
-				
+
 int			ft_printf(const char *format, ...);
 
 long		ft_convert(long l, char convert);
@@ -102,7 +102,8 @@ void		ft_lstdelone(t_list *lst, void (*del)(int));
 void		ft_lstiter(t_list *lst, void (*f)(int));
 t_list		*ft_lstmap(t_list *lst, int (*f)(int), void (*del)(int));
 int			ft_lstsize(t_list *lst);
-int			ft_abs(int a);char	*end_file(char *result, char currentl[BUFFER_SIZE + 1]);
+int			ft_abs(int a);
+char		*end_file(char *result, char currentl[BUFFER_SIZE + 1]);
 char		*cat_alloc(char newend[BUFFER_SIZE + 1], char *oldres, int size);
 int			nextendl(char line[BUFFER_SIZE + 1]);
 int			checkendl(char currentl[BUFFER_SIZE + 1],

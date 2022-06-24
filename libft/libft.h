@@ -6,7 +6,7 @@
 /*   By: ppajot <ppajot@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/03 15:51:21 by ppajot            #+#    #+#             */
-/*   Updated: 2022/06/23 21:49:38 by ppajot           ###   ########.fr       */
+/*   Updated: 2022/06/24 17:05:55 by ppajot           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -78,7 +78,7 @@ char		**ft_split(char const *s, char c);
 char		*ft_strchr(const char *str, int c);
 char		*ft_strdup(const char *s);
 void		ft_striteri(char *s, void (*f)(unsigned int, char *));
-char		*ft_strjoin(char const *s1, char const *s2);
+char		*ft_strjoin(char const *s1, char const *s2, char *c);
 size_t		ft_strlcat(char *dest, const char *src, size_t size);
 size_t		ft_strlcpy(char *dest, const char *src, size_t size);
 char		*ft_strmapi(char const *s, char (*f)(unsigned int, char));

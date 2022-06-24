@@ -6,7 +6,7 @@
 /*   By: ppajot <ppajot@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/23 17:50:00 by ppajot            #+#    #+#             */
-/*   Updated: 2022/06/23 21:52:03 by ppajot           ###   ########.fr       */
+/*   Updated: 2022/06/24 19:45:09 by ppajot           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,9 +44,9 @@ void	run_cmd_in(t_data data)
 	if (cpid == 0)
 	{
 		dup2(data.fd1, 0);
-		dup2(data.pfd[0][1], 1);
+		dup2(data.pfd[0][1], 1);	
 		close_all_fd(data);
-		if (data.cmd_array[0].path == 0)
+		if (data.cmd_array[0].path == 0 || data.fd1 < 0)
 		{
 			free_data(data);
 			exit (0);

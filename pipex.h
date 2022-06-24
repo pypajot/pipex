@@ -6,7 +6,7 @@
 /*   By: ppajot <ppajot@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/20 20:09:03 by ppajot            #+#    #+#             */
-/*   Updated: 2022/06/23 21:49:57 by ppajot           ###   ########.fr       */
+/*   Updated: 2022/06/24 19:45:24 by ppajot           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,10 +42,11 @@ typedef struct s_data
 }	t_data;
 
 char	*ft_strdup(const char *s);
-char	*ft_strjoin(char const *s1, char const *s2);
+char	*ft_strjoin(char const *s1, char const *s2, char *c);
 char	**ft_split(char const *s, char c);
 size_t	ft_strlen(const char *str);
 int		ft_strcmp(char *str1, char *str2);
+int		ft_strncmp(const char *s1, const char *s2, size_t n);
 
 void	free_array(char **array);
 
@@ -53,11 +54,11 @@ int		ft_printf(const char *format, ...);
 
 char	*get_next_line(int fd);
 
-char	*get_path(char *cmd);
+char	*get_path(char *cmd, char **envp);
 
 void	run_all_cmd(t_data data);
 
-void	init_data(t_data *data, int ac, char **av);
+void	init_data(t_data *data, int ac, char **av, char **envp);
 
 void	free_data(t_data data);
 

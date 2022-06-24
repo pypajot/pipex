@@ -6,7 +6,7 @@
 /*   By: ppajot <ppajot@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/23 17:49:08 by ppajot            #+#    #+#             */
-/*   Updated: 2022/06/23 20:00:21 by ppajot           ###   ########.fr       */
+/*   Updated: 2022/06/24 18:18:23 by ppajot           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,8 @@ void	close_all_fd(t_data data)
 		close(data.pfd[i][0]);
 		close(data.pfd[i][1]);
 	}
-	if (!data.hd)
+	if (!data.hd && data.fd1 >= 0)
 		close(data.fd1);
-	close(data.fd2);
+	if (data.fd2 >= 0)
+		close(data.fd2);
 }

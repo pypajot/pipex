@@ -6,7 +6,7 @@
 /*   By: ppajot <ppajot@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/23 17:52:49 by ppajot            #+#    #+#             */
-/*   Updated: 2022/06/23 21:50:26 by ppajot           ###   ########.fr       */
+/*   Updated: 2022/06/24 18:39:59 by ppajot           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,5 +26,4 @@ void	free_data(t_data data)
 	}
 	free(data.pfd);
 	free(data.cmd_array);
-	free(0);
 }

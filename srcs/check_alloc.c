@@ -1,31 +1,32 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   free_data.c                                        :+:      :+:    :+:   */
+/*   check_alloc.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: ppajot <ppajot@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/06/23 17:52:49 by ppajot            #+#    #+#             */
-/*   Updated: 2022/06/25 15:47:35 by ppajot           ###   ########.fr       */
+/*   Created: 2022/06/25 15:53:16 by ppajot            #+#    #+#             */
+/*   Updated: 2022/06/25 15:53:32 by ppajot           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../pipex.h"
 
-void	free_data(t_data data)
+int	check_alloc(t_data data)
 {
 	int	i;
 
 	i = 0;
+	if (!data.pfd || !data.cmd_array)
+		return (0);
 	while (i < data.cmd_nbr)
 	{
-		if (data.cmd_array[i].av != 0)
-			free_array(data.cmd_array[i].av);
+		if (!data.cmd_array[i].av)
+			return (0);
 		if (i != data.cmd_nbr - 1 + data.hd)
-			if (data.pfd[i] != 0)
-				free(data.pfd[i]);
+			if(!data.pfd[i])
+				return (0);
 		i++;
 	}
-	free(data.pfd);
-	free(data.cmd_array);
+	return (1);
 }

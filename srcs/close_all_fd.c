@@ -6,7 +6,7 @@
 /*   By: ppajot <ppajot@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/23 17:49:08 by ppajot            #+#    #+#             */
-/*   Updated: 2022/06/24 18:18:23 by ppajot           ###   ########.fr       */
+/*   Updated: 2022/06/25 15:50:33 by ppajot           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,7 @@ void	close_all_fd(t_data data)
 	int	i;
 
 	i = -1;
-	while (++i < data.cmd_nbr - 1 + data.hd)
+	while (++i < data.cmd_nbr - 1 + data.hd && data.pfd[i] != 0)
 	{
 		close(data.pfd[i][0]);
 		close(data.pfd[i][1]);

@@ -6,13 +6,13 @@
 /*   By: ppajot <ppajot@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/23 17:50:00 by ppajot            #+#    #+#             */
-/*   Updated: 2022/06/24 19:45:09 by ppajot           ###   ########.fr       */
+/*   Updated: 2022/06/25 17:59:02 by ppajot           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../pipex.h"
 
-void	stdin_to_pipe(t_data data)
+int	stdin_to_pipe(t_data data)
 {
 	int		newfd;
 	char	*str;
@@ -23,7 +23,7 @@ void	stdin_to_pipe(t_data data)
 	{
 		newfd = dup(data.pfd[0][1]);
 		close_all_fd(data);
-		str = get_next_line(0);
+		str = get_next_line(0);		
 		while (ft_strcmp(str, data.lim) != 10)
 		{
 			write(newfd, str, ft_strlen(str));
@@ -32,11 +32,13 @@ void	stdin_to_pipe(t_data data)
 		}
 		free(str);
 		free_data(data);
+		close (newfd);
 		exit (0);
 	}
+	return (cpid);
 }
 
-void	run_cmd_in(t_data data)
+int	run_cmd_in(t_data data)
 {
 	int	cpid;
 
@@ -48,11 +50,15 @@ void	run_cmd_in(t_data data)
 		close_all_fd(data);
 		if (data.cmd_array[0].path == 0 || data.fd1 < 0)
 		{
+			close (1);
+			if (data.fd1 >= 0)
+				close(0);
 			free_data(data);
 			exit (0);
 		}		
 		execve(data.cmd_array[0].path, data.cmd_array[0].av, 0);
 	}
+	return (cpid);
 }
 
 void	run_cmd_i(t_data data, int i)
@@ -67,6 +73,8 @@ void	run_cmd_i(t_data data, int i)
 		close_all_fd(data);
 		if (data.cmd_array[i + 1 - data.hd].path == 0)
 		{
+			close(0);
+			close(1);
 			free_data(data);
 			exit (0);
 		}
@@ -87,6 +95,8 @@ void	run_cmd_out(t_data data, int i)
 		close_all_fd(data);
 		if (data.cmd_array[i + 1 - data.hd].path == 0)
 		{
+			close(0);
+			close(1);
 			free_data(data);
 			exit (0);
 		}
@@ -98,14 +108,18 @@ void	run_cmd_out(t_data data, int i)
 void	run_all_cmd(t_data data)
 {	
 	int	i;
+	int	pid;
 
 	i = -1;
 	if (!data.hd)
-		run_cmd_in(data);
+		pid = run_cmd_in(data);
 	else
-		stdin_to_pipe(data);
+		pid = stdin_to_pipe(data);
 	while (++i < data.cmd_nbr - 2 + data.hd)
 		run_cmd_i(data, i);
 	run_cmd_out(data, i);
-	wait(0);
+	//if (data.hd)
+		waitpid(pid, 0, 0);
+	//else
+		//wait(0);
 }

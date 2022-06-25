@@ -1,7 +1,7 @@
 SRCDIR := srcs
 OBJDIR := objs
 
-SRCS_ := close_all_fd.c  free_data.c  get_path.c  init_data.c  main.c  run_all_cmd.c ft_error.c
+SRCS_ := close_all_fd.c  free_data.c  get_path.c  init_data.c  main.c  check_alloc.c  run_all_cmd.c ft_error.c
 SRCS := $(patsubst %,$(SRCDIR)/%,$(SRCS_))
 
 OBJ := $(patsubst %.c,$(OBJDIR)/%.o,$(SRCS_))

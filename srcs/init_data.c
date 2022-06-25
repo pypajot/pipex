@@ -6,7 +6,7 @@
 /*   By: ppajot <ppajot@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/23 17:48:19 by ppajot            #+#    #+#             */
-/*   Updated: 2022/06/25 18:15:46 by ppajot           ###   ########.fr       */
+/*   Updated: 2022/06/25 19:57:04 by ppajot           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,11 +50,17 @@ int	init_data(t_data *data, int ac, char **av, char **envp)
 		if (data->fd1 < 0)
 			ft_printf("%s: %s\n", strerror(errno), av[1]);
 		data->fd2 = open(av[ac - 1], O_WRONLY | O_CREAT | O_TRUNC, 00777);
+		if (data->fd2 < 0)
+			ft_printf("%s: %s\n", strerror(errno), av[ac - 1]);
 	}
 	else
+	{
 		data->fd2 = open(av[ac - 1], O_WRONLY | O_CREAT | O_APPEND, 00777);
+		if (data->fd2 < 0)
+			ft_printf("%s: %s\n", strerror(errno), av[ac - 1]);
+	}
 	alloc_data(data, av, envp);
-	if (!check_alloc(*data))
+	if (!check_alloc(*data) || data->fd2 < 0)
 	{
 		close_all_fd(*data);
 		free_data(*data);

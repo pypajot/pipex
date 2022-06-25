@@ -28,14 +28,12 @@ $(NAME) : $(OBJ) $(LIBFT)
 
 
 clean:
-	rm -f $(OBJ)
-	rm -d $(OBJDIR)
+	rm -fd $(OBJ) $(OBJDIR)
 	make -C $(dir $(LIBFT)) clean
 
 
 fclean:
-	rm -f $(OBJ) $(NAME)
-	rm -d $(OBJDIR)
+	rm -fd $(OBJ) $(NAME) $(OBJDIR)
 	make -C $(dir $(LIBFT)) fclean
 
 
@@ -46,3 +44,8 @@ $(LIBFT):
 re:
 	make fclean
 	make all
+
+bonus: all
+
+
+.PHONY: clean fclean re all bonus

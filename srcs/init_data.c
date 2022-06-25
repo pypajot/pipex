@@ -6,7 +6,7 @@
 /*   By: ppajot <ppajot@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/23 17:48:19 by ppajot            #+#    #+#             */
-/*   Updated: 2022/06/25 16:07:22 by ppajot           ###   ########.fr       */
+/*   Updated: 2022/06/25 18:15:46 by ppajot           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,7 +26,8 @@ void	alloc_data(t_data *data, char **av, char **envp)
 			data->cmd_array[i].av = ft_split(av[i + 2 + data->hd], ' ');
 			if (data->cmd_array[i].av != 0)
 			{
-				data->cmd_array[i].path = get_path(data->cmd_array[i].av[0], envp);
+				data->cmd_array[i].path
+					= get_path(data->cmd_array[i].av[0], envp);
 				free(data->cmd_array[i].av[0]);
 				data->cmd_array[i].av[0] = data->cmd_array[i].path;
 			}
@@ -47,7 +48,7 @@ int	init_data(t_data *data, int ac, char **av, char **envp)
 	{
 		data->fd1 = open (av[1], 0);
 		if (data->fd1 < 0)
-			ft_printf("%s: %s\n", strerror(errno), av[1]);		
+			ft_printf("%s: %s\n", strerror(errno), av[1]);
 		data->fd2 = open(av[ac - 1], O_WRONLY | O_CREAT | O_TRUNC, 00777);
 	}
 	else

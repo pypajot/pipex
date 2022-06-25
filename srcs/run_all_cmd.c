@@ -6,7 +6,7 @@
 /*   By: ppajot <ppajot@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/23 17:50:00 by ppajot            #+#    #+#             */
-/*   Updated: 2022/06/25 17:59:02 by ppajot           ###   ########.fr       */
+/*   Updated: 2022/06/25 18:24:30 by ppajot           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,7 @@ int	stdin_to_pipe(t_data data)
 	{
 		newfd = dup(data.pfd[0][1]);
 		close_all_fd(data);
-		str = get_next_line(0);		
+		str = get_next_line(0);
 		while (ft_strcmp(str, data.lim) != 10)
 		{
 			write(newfd, str, ft_strlen(str));
@@ -46,7 +46,7 @@ int	run_cmd_in(t_data data)
 	if (cpid == 0)
 	{
 		dup2(data.fd1, 0);
-		dup2(data.pfd[0][1], 1);	
+		dup2(data.pfd[0][1], 1);
 		close_all_fd(data);
 		if (data.cmd_array[0].path == 0 || data.fd1 < 0)
 		{
@@ -57,6 +57,8 @@ int	run_cmd_in(t_data data)
 			exit (0);
 		}		
 		execve(data.cmd_array[0].path, data.cmd_array[0].av, 0);
+		free_data(data);
+		exit (0);
 	}
 	return (cpid);
 }
@@ -80,6 +82,8 @@ void	run_cmd_i(t_data data, int i)
 		}
 		execve(data.cmd_array[i + 1 - data.hd].path,
 			data.cmd_array[i + 1 - data.hd].av, 0);
+		free_data(data);
+		exit (0);
 	}
 }
 
@@ -102,6 +106,8 @@ void	run_cmd_out(t_data data, int i)
 		}
 		execve(data.cmd_array[i + 1 - data.hd].path,
 			data.cmd_array[i + 1 - data.hd].av, 0);
+		free_data(data);
+		exit (0);
 	}
 }
 
@@ -118,8 +124,5 @@ void	run_all_cmd(t_data data)
 	while (++i < data.cmd_nbr - 2 + data.hd)
 		run_cmd_i(data, i);
 	run_cmd_out(data, i);
-	//if (data.hd)
-		waitpid(pid, 0, 0);
-	//else
-		//wait(0);
+	waitpid(pid, 0, 0);
 }

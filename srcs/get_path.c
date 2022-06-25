@@ -6,7 +6,7 @@
 /*   By: ppajot <ppajot@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/22 17:48:32 by ppajot            #+#    #+#             */
-/*   Updated: 2022/06/25 15:37:59 by ppajot           ###   ########.fr       */
+/*   Updated: 2022/06/25 18:15:16 by ppajot           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,7 +43,7 @@ char	*cmd_path(char *cmd, char **envp)
 	int		i;
 	char	**path_array;
 	char	*path;
-	
+
 	i = -1;
 	path_array = path_init(envp);
 	if (!path_array)
@@ -66,7 +66,7 @@ char	*cmd_path(char *cmd, char **envp)
 
 char	*get_path(char *cmd, char **envp)
 {
-	char *path;
+	char	*path;
 
 	if (!is_command(cmd))
 	{

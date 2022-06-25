@@ -6,7 +6,7 @@
 /*   By: ppajot <ppajot@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/23 17:50:00 by ppajot            #+#    #+#             */
-/*   Updated: 2022/06/25 18:24:30 by ppajot           ###   ########.fr       */
+/*   Updated: 2022/06/25 21:09:29 by ppajot           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -118,11 +118,15 @@ void	run_all_cmd(t_data data)
 
 	i = -1;
 	if (!data.hd)
-		pid = run_cmd_in(data);
+		pid  = run_cmd_in(data);
 	else
 		pid = stdin_to_pipe(data);
 	while (++i < data.cmd_nbr - 2 + data.hd)
 		run_cmd_i(data, i);
 	run_cmd_out(data, i);
 	waitpid(pid, 0, 0);
+	if (!data.hd)
+		wait (0);
+	
+		
 }

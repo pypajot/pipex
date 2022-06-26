@@ -6,7 +6,7 @@
 /*   By: ppajot <ppajot@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/22 17:48:32 by ppajot            #+#    #+#             */
-/*   Updated: 2022/06/25 18:15:16 by ppajot           ###   ########.fr       */
+/*   Updated: 2022/06/26 16:52:50 by ppajot           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,7 +38,7 @@ static char	**path_init(char **envp)
 	return (path_array);
 }
 
-char	*cmd_path(char *cmd, char **envp)
+static char	*cmd_path(char *cmd, char **envp)
 {
 	int		i;
 	char	**path_array;

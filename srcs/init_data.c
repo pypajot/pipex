@@ -6,30 +6,49 @@
 /*   By: ppajot <ppajot@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/23 17:48:19 by ppajot            #+#    #+#             */
-/*   Updated: 2022/06/25 20:07:49 by ppajot           ###   ########.fr       */
+/*   Updated: 2022/06/26 16:52:04 by ppajot           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../pipex.h"
 
-void	alloc_data(t_data *data, char **av, char **envp)
+static int	check_alloc(t_data data)
+{
+	int	i;
+
+	i = 0;
+	if (!data.pfd || !data.cmd_arr || !data.pid)
+		return (0);
+	while (i < data.cmd_nbr)
+	{
+		if (!data.cmd_arr[i].av)
+			return (0);
+		if (i != data.cmd_nbr - 1 + data.hd)
+			if (!data.pfd[i])
+				return (0);
+		i++;
+	}
+	return (1);
+}
+
+static void	alloc_data(t_data *data, char **av, char **envp)
 {
 	int	i;
 
 	i = -1;
-	data->cmd_array = (t_cmd *)malloc(sizeof(t_cmd) * data->cmd_nbr);
+	data->cmd_arr = (t_cmd *)malloc(sizeof(t_cmd) * data->cmd_nbr);
 	data->pfd = (int **)malloc(sizeof(int *) * (data->cmd_nbr - 1 + data->hd));
+	data->pid = (int *)malloc((data->cmd_nbr + data->hd) * sizeof(int));
 	while (++i < data->cmd_nbr)
 	{
-		if (data->cmd_array != 0)
+		if (data->cmd_arr != 0)
 		{
-			data->cmd_array[i].av = ft_split(av[i + 2 + data->hd], ' ');
-			if (data->cmd_array[i].av != 0)
+			data->cmd_arr[i].av = ft_split(av[i + 2 + data->hd], ' ');
+			if (data->cmd_arr[i].av != 0)
 			{
-				data->cmd_array[i].path
-					= get_path(data->cmd_array[i].av[0], envp);
-				free(data->cmd_array[i].av[0]);
-				data->cmd_array[i].av[0] = data->cmd_array[i].path;
+				data->cmd_arr[i].path = get_path(data->cmd_arr[i].av[0], envp);
+				free(data->cmd_arr[i].av[0]);
+				data->cmd_arr[i].av[0] = data->cmd_arr[i].path;
 			}
 		}	
 		if (i != data->cmd_nbr - 1 + data->hd && data->pfd != 0)

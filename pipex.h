@@ -6,7 +6,7 @@
 /*   By: ppajot <ppajot@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/20 20:09:03 by ppajot            #+#    #+#             */
-/*   Updated: 2022/06/25 16:53:22 by ppajot           ###   ########.fr       */
+/*   Updated: 2022/06/26 16:46:54 by ppajot           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,8 +37,9 @@ typedef struct s_data
 	int		hd;
 	char	*lim;
 	int		cmd_nbr;
-	t_cmd	*cmd_array;
+	t_cmd	*cmd_arr;
 	int		**pfd;
+	int		*pid;
 }	t_data;
 
 char	*ft_strdup(const char *s);
@@ -56,7 +57,7 @@ char	*get_next_line(int fd);
 
 char	*get_path(char *cmd, char **envp);
 
-void	run_all_cmd(t_data data);
+void	run_all_cmd(t_data data, char **envp);
 
 int		init_data(t_data *data, int ac, char **av, char **envp);
 
@@ -65,7 +66,5 @@ void	free_data(t_data data);
 void	close_all_fd(t_data data);
 
 char	*ft_error(int err, char *str);
-
-int		check_alloc(t_data data);
 
 #endif

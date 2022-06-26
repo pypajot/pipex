@@ -6,13 +6,13 @@
 /*   By: ppajot <ppajot@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/23 17:50:00 by ppajot            #+#    #+#             */
-/*   Updated: 2022/06/25 21:09:29 by ppajot           ###   ########.fr       */
+/*   Updated: 2022/06/26 16:52:29 by ppajot           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../pipex.h"
 
-int	stdin_to_pipe(t_data data)
+static int	stdin_to_pipe(t_data data)
 {
 	int		newfd;
 	char	*str;
@@ -38,7 +38,7 @@ int	stdin_to_pipe(t_data data)
 	return (cpid);
 }
 
-int	run_cmd_in(t_data data)
+static int	run_cmd_in(t_data data, char **envp)
 {
 	int	cpid;
 
@@ -48,7 +48,7 @@ int	run_cmd_in(t_data data)
 		dup2(data.fd1, 0);
 		dup2(data.pfd[0][1], 1);
 		close_all_fd(data);
-		if (data.cmd_array[0].path == 0 || data.fd1 < 0)
+		if (data.cmd_arr[0].path == 0 || data.fd1 < 0)
 		{
 			close (1);
 			if (data.fd1 >= 0)
@@ -56,14 +56,14 @@ int	run_cmd_in(t_data data)
 			free_data(data);
 			exit (0);
 		}		
-		execve(data.cmd_array[0].path, data.cmd_array[0].av, 0);
+		execve(data.cmd_arr[0].path, data.cmd_arr[0].av, envp);
 		free_data(data);
 		exit (0);
 	}
 	return (cpid);
 }
 
-void	run_cmd_i(t_data data, int i)
+static int	run_cmd_i(t_data data, int i, char **envp)
 {
 	int	cpid;
 
@@ -73,21 +73,22 @@ void	run_cmd_i(t_data data, int i)
 		dup2(data.pfd[i + 1][1], 1);
 		dup2(data.pfd[i][0], 0);
 		close_all_fd(data);
-		if (data.cmd_array[i + 1 - data.hd].path == 0)
+		if (data.cmd_arr[i + 1 - data.hd].path == 0)
 		{
 			close(0);
 			close(1);
 			free_data(data);
 			exit (0);
 		}
-		execve(data.cmd_array[i + 1 - data.hd].path,
-			data.cmd_array[i + 1 - data.hd].av, 0);
+		execve(data.cmd_arr[i + 1 - data.hd].path,
+			data.cmd_arr[i + 1 - data.hd].av, envp);
 		free_data(data);
 		exit (0);
 	}
+	return (cpid);
 }
 
-void	run_cmd_out(t_data data, int i)
+static int	run_cmd_out(t_data data, int i, char **envp)
 {
 	int	cpid;
 
@@ -97,36 +98,39 @@ void	run_cmd_out(t_data data, int i)
 		dup2(data.pfd[i][0], 0);
 		dup2(data.fd2, 1);
 		close_all_fd(data);
-		if (data.cmd_array[i + 1 - data.hd].path == 0)
+		if (data.cmd_arr[i + 1 - data.hd].path == 0)
 		{
 			close(0);
 			close(1);
 			free_data(data);
 			exit (0);
 		}
-		execve(data.cmd_array[i + 1 - data.hd].path,
-			data.cmd_array[i + 1 - data.hd].av, 0);
+		execve(data.cmd_arr[i + 1 - data.hd].path,
+			data.cmd_arr[i + 1 - data.hd].av, envp);
 		free_data(data);
 		exit (0);
 	}
+	return (cpid);
 }
 
-void	run_all_cmd(t_data data)
+void	run_all_cmd(t_data data, char **envp)
 {	
 	int	i;
-	int	pid;
+	int	status;
 
 	i = -1;
+	status = 0;
 	if (!data.hd)
-		pid  = run_cmd_in(data);
+		data.pid[0] = run_cmd_in(data, envp);
 	else
-		pid = stdin_to_pipe(data);
+		data.pid[0] = stdin_to_pipe(data);
 	while (++i < data.cmd_nbr - 2 + data.hd)
-		run_cmd_i(data, i);
-	run_cmd_out(data, i);
-	waitpid(pid, 0, 0);
+		data.pid[i + 1] = run_cmd_i(data, i, envp);
+	data.pid[i + 1] = run_cmd_out(data, i, envp);
 	if (!data.hd)
-		wait (0);
-	
-		
+		close_all_fd(data);
+	i = 0;
+	waitpid(data.pid[i], &status, 0);
+	while (++i < data.cmd_nbr && !data.hd)
+		waitpid(data.pid[i], &status, 0);
 }

@@ -12,8 +12,14 @@
 
 #include "../pipex.h"
 
-char	*ft_error(int err)
+char	*ft_error(int err, char *str)
 {
+	if (err == CMD_NOT_FOUND)
+	{
+		write(2, "command not found: ", 19);
+		write(2, str, ft_strlen(str));
+		write(2, "\n", 1);
+	}
 	if (err == NOT_ENOUGH_ARG)
 		write(2, "not enough arguments\n", 21);
 	return (0);

@@ -77,6 +77,6 @@ char	*get_path(char *cmd, char **envp)
 	}
 	path = cmd_path(cmd, envp);
 	if (!path)
-		return (perror(cmd), (void *)0);
+		return (ft_error(CMD_NOT_FOUND, cmd));
 	return (path);
 }

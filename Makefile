@@ -14,7 +14,7 @@ INC := pipex.h
 LIBFT := libft/libft.a
 
 CC := gcc
-FLAGS := -Wall -Wextra -g
+FLAGS := -Wall -Wextra -Werror
 
 all : $(NAME)
 
@@ -25,7 +25,7 @@ $(OBJDIR)/%.o : $(SRCDIR)/%.c $(INC)
 
 
 $(NAME) : $(OBJ) $(LIBFT)
-	$(CC) -g $(OBJ) -o $(NAME) $(LIBFT)
+	$(CC) $(OBJ) -o $(NAME) $(LIBFT)
 
 
 clean:

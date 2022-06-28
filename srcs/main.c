@@ -17,7 +17,7 @@ int	main(int ac, char **av, char **envp)
 	t_data	data;
 
 	if (ac < 5)
-		return (0);
+		return (ft_error(NOT_ENOUGH_ARG, 0), 0);
 	if (ft_strcmp(av[1], "here_doc"))
 		data.hd = 0;
 	else

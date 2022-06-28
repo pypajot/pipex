@@ -23,6 +23,7 @@
 
 # define CMD_NOT_FOUND 1
 # define NO_SUCH_FILE 2
+# define NOT_ENOUGH_ARG 3
 
 typedef struct s_cmd
 {

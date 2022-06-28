@@ -73,10 +73,10 @@ char	*get_path(char *cmd, char **envp)
 		if (access(cmd, X_OK) == 0)
 			return (ft_strdup(cmd));
 		else
-			return (ft_error(NO_SUCH_FILE, cmd));
+			return (perror(cmd), (void *)0);
 	}
 	path = cmd_path(cmd, envp);
 	if (!path)
-		return (ft_error(CMD_NOT_FOUND, cmd));
+		return (perror(cmd), (void *)0);
 	return (path);
 }

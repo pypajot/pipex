@@ -12,11 +12,9 @@
 
 #include "../pipex.h"
 
-char	*ft_error(int err, char *str)
+char	*ft_error(int err)
 {
-	if (err == CMD_NOT_FOUND)
-		ft_printf("command not found: %s\n", str);
-	if (err == NO_SUCH_FILE)
-		ft_printf("No such file or directory: %s\n", str);
+	if (err == NOT_ENOUGH_ARG)
+		write(2, "not enough arguments\n", 21);
 	return (0);
 }

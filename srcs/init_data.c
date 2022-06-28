@@ -67,13 +67,13 @@ int	init_data(t_data *data, int ac, char **av, char **envp)
 	{
 		data->fd1 = open (av[1], 0);
 		if (data->fd1 < 0)
-			ft_printf("%s: %s\n", strerror(errno), av[1]);
+			perror(av[1]);
 		data->fd2 = open(av[ac - 1], O_WRONLY | O_CREAT | O_TRUNC, 00777);
 	}
 	else
 		data->fd2 = open(av[ac - 1], O_WRONLY | O_CREAT | O_APPEND, 00777);
 	if (data->fd2 < 0)
-		ft_printf("%s: %s\n", strerror(errno), av[ac - 1]);
+		perror(av[ac - 1]);
 	alloc_data(data, av, envp);
 	if (!check_alloc(*data) || data->fd2 < 0)
 	{

@@ -35,6 +35,8 @@ static int	stdin_to_pipe(t_data data)
 		close (newfd);
 		exit (0);
 	}
+	if (cpid < 0)
+		perror("");
 	return (cpid);
 }
 
@@ -60,6 +62,8 @@ static int	run_cmd_in(t_data data, char **envp)
 		free_data(data);
 		exit (0);
 	}
+	if (cpid < 0)
+		perror("");
 	return (cpid);
 }
 
@@ -85,6 +89,8 @@ static int	run_cmd_i(t_data data, int i, char **envp)
 		free_data(data);
 		exit (0);
 	}
+	if (cpid < 0)
+		perror("");
 	return (cpid);
 }
 
@@ -110,6 +116,8 @@ static int	run_cmd_out(t_data data, int i, char **envp)
 		free_data(data);
 		exit (0);
 	}
+	if (cpid < 0)
+		perror("");
 	return (cpid);
 }
 

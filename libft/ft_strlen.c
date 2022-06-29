@@ -6,7 +6,7 @@
 /*   By: ppajot <ppajot@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/02 13:20:14 by ppajot            #+#    #+#             */
-/*   Updated: 2022/05/12 16:09:13 by ppajot           ###   ########.fr       */
+/*   Updated: 2022/06/29 20:47:06 by ppajot           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,6 +17,8 @@ size_t	ft_strlen(const char *str)
 	int	i;
 
 	i = 0;
+	if (!str)
+		return (0);
 	while (str[i])
 		i++;
 	return (i);

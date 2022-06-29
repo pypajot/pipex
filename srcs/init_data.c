@@ -6,7 +6,7 @@
 /*   By: ppajot <ppajot@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/23 17:48:19 by ppajot            #+#    #+#             */
-/*   Updated: 2022/06/26 16:52:04 by ppajot           ###   ########.fr       */
+/*   Updated: 2022/06/29 20:56:47 by ppajot           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,13 +43,16 @@ static void	alloc_data(t_data *data, char **av, char **envp)
 	{
 		if (data->cmd_arr != 0)
 		{
-			data->cmd_arr[i].av = ft_split(av[i + 2 + data->hd], ' ');
+			data->cmd_arr[i].av = ft_split(av[i + 2 + data->hd], ' ');		
 			if (data->cmd_arr[i].av != 0)
 			{
 				data->cmd_arr[i].path = get_path(data->cmd_arr[i].av[0], envp);
-				free(data->cmd_arr[i].av[0]);
-				data->cmd_arr[i].av[0] = data->cmd_arr[i].path;
-			}
+				if (data->cmd_arr[i].path != 0)
+				{
+					free(data->cmd_arr[i].av[0]);
+					data->cmd_arr[i].av[0] = data->cmd_arr[i].path;
+				}
+			}		
 		}	
 		if (i != data->cmd_nbr - 1 + data->hd && data->pfd != 0)
 		{
@@ -65,7 +68,7 @@ int	init_data(t_data *data, int ac, char **av, char **envp)
 	data->cmd_nbr = ac - (3 + data->hd);
 	if (!data->hd)
 	{
-		data->fd1 = open (av[1], 0);
+		data->fd1 = open(av[1], 0);
 		if (data->fd1 < 0)
 			perror(av[1]);
 		data->fd2 = open(av[ac - 1], O_WRONLY | O_CREAT | O_TRUNC, 00777);

@@ -6,7 +6,7 @@
 /*   By: ppajot <ppajot@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/23 17:52:49 by ppajot            #+#    #+#             */
-/*   Updated: 2022/06/26 16:41:01 by ppajot           ###   ########.fr       */
+/*   Updated: 2022/06/29 21:30:35 by ppajot           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,12 +21,8 @@ void	free_data(t_data data)
 	{
 		if (data.cmd_arr[i].av != 0)
 			free_array(data.cmd_arr[i].av);
-		if (i != data.cmd_nbr - 1 + data.hd)
-			if (data.pfd[i] != 0)
-				free(data.pfd[i]);
 		i++;
 	}
 	free(data.pid);
-	free(data.pfd);
 	free(data.cmd_arr);
 }

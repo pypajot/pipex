@@ -6,7 +6,7 @@
 /*   By: ppajot <ppajot@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/23 17:48:19 by ppajot            #+#    #+#             */
-/*   Updated: 2022/06/29 20:56:47 by ppajot           ###   ########.fr       */
+/*   Updated: 2022/06/29 22:30:37 by ppajot           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,15 +17,12 @@ static int	check_alloc(t_data data)
 	int	i;
 
 	i = 0;
-	if (!data.pfd || !data.cmd_arr || !data.pid)
+	if (!data.cmd_arr || !data.pid)
 		return (0);
 	while (i < data.cmd_nbr)
 	{
 		if (!data.cmd_arr[i].av)
 			return (0);
-		if (i != data.cmd_nbr - 1 + data.hd)
-			if (!data.pfd[i])
-				return (0);
 		i++;
 	}
 	return (1);
@@ -37,7 +34,6 @@ static void	alloc_data(t_data *data, char **av, char **envp)
 
 	i = -1;
 	data->cmd_arr = (t_cmd *)malloc(sizeof(t_cmd) * data->cmd_nbr);
-	data->pfd = (int **)malloc(sizeof(int *) * (data->cmd_nbr - 1 + data->hd));
 	data->pid = (int *)malloc((data->cmd_nbr + data->hd) * sizeof(int));
 	while (++i < data->cmd_nbr)
 	{
@@ -53,12 +49,6 @@ static void	alloc_data(t_data *data, char **av, char **envp)
 					data->cmd_arr[i].av[0] = data->cmd_arr[i].path;
 				}
 			}		
-		}	
-		if (i != data->cmd_nbr - 1 + data->hd && data->pfd != 0)
-		{
-			data->pfd[i] = (int *)malloc(sizeof(int) * 2);
-			if (data->pfd[i] != 0)
-				pipe(data->pfd[i]);
 		}
 	}
 }
@@ -84,5 +74,9 @@ int	init_data(t_data *data, int ac, char **av, char **envp)
 		free_data(*data);
 		return (0);
 	}
+	data->pfd[0][0] = -1;
+	data->pfd[0][1] = -1;
+	data->pfd[1][0] = -1;
+	data->pfd[1][1] = -1;
 	return (1);
 }

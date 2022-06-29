@@ -6,7 +6,7 @@
 /*   By: ppajot <ppajot@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/20 20:09:03 by ppajot            #+#    #+#             */
-/*   Updated: 2022/06/26 16:46:54 by ppajot           ###   ########.fr       */
+/*   Updated: 2022/06/29 22:21:11 by ppajot           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,7 +39,7 @@ typedef struct s_data
 	char	*lim;
 	int		cmd_nbr;
 	t_cmd	*cmd_arr;
-	int		**pfd;
+	int		pfd[2][2];
 	int		*pid;
 }	t_data;
 

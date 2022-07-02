@@ -61,7 +61,7 @@ bonus : $(NAME_BONUS)
 
 
 $(NAME_BONUS): $(OBJ_BONUS) $(LIBFT)
-	$(CC) $(OBJ_BONUS) -o $(NAME_BONUS) $(LIBFT)
+	$(CC) $(OBJ_BONUS) -o $(NAME) $(LIBFT)
 
 
 .PHONY: clean fclean re all bonus

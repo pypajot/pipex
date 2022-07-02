@@ -6,7 +6,7 @@
 /*   By: ppajot <ppajot@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/02 18:03:10 by ppajot            #+#    #+#             */
-/*   Updated: 2022/07/02 18:07:30 by ppajot           ###   ########.fr       */
+/*   Updated: 2022/07/02 22:06:46 by ppajot           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,7 +27,7 @@ int	main(int ac, char **av, char **envp)
 		data.hd = 1;
 		data.lim = av[2];
 	}
-	if (!init_data(&data, ac, av, envp))
+	if (!init_data(&data, ac, av))
 		return (0);
 	run_all_cmd(data, envp);
 	close_all_fd(data);

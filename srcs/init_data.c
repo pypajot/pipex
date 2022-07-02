@@ -6,7 +6,7 @@
 /*   By: ppajot <ppajot@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/23 17:48:19 by ppajot            #+#    #+#             */
-/*   Updated: 2022/06/29 22:30:37 by ppajot           ###   ########.fr       */
+/*   Updated: 2022/07/02 22:08:21 by ppajot           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,7 +28,7 @@ static int	check_alloc(t_data data)
 	return (1);
 }
 
-static void	alloc_data(t_data *data, char **av, char **envp)
+static void	alloc_data(t_data *data, char **av/*, char **envp*/)
 {
 	int	i;
 
@@ -39,8 +39,8 @@ static void	alloc_data(t_data *data, char **av, char **envp)
 	{
 		if (data->cmd_arr != 0)
 		{
-			data->cmd_arr[i].av = ft_split(av[i + 2 + data->hd], ' ');		
-			if (data->cmd_arr[i].av != 0)
+			data->cmd_arr[i].av = ft_split(av[i + 2 + data->hd], ' ');
+			/*if (data->cmd_arr[i].av != 0)
 			{
 				data->cmd_arr[i].path = get_path(data->cmd_arr[i].av[0], envp);
 				if (data->cmd_arr[i].path != 0)
@@ -48,12 +48,12 @@ static void	alloc_data(t_data *data, char **av, char **envp)
 					free(data->cmd_arr[i].av[0]);
 					data->cmd_arr[i].av[0] = data->cmd_arr[i].path;
 				}
-			}		
+			}	*/	
 		}
 	}
 }
 
-int	init_data(t_data *data, int ac, char **av, char **envp)
+int	init_data(t_data *data, int ac, char **av)
 {
 	data->cmd_nbr = ac - (3 + data->hd);
 	if (!data->hd)
@@ -67,7 +67,7 @@ int	init_data(t_data *data, int ac, char **av, char **envp)
 		data->fd2 = open(av[ac - 1], O_WRONLY | O_CREAT | O_APPEND, 00777);
 	if (data->fd2 < 0)
 		perror(av[ac - 1]);
-	alloc_data(data, av, envp);
+	alloc_data(data, av);
 	if (!check_alloc(*data) || data->fd2 < 0)
 	{
 		close_all_fd(*data);

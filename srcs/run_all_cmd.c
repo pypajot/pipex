@@ -6,7 +6,7 @@
 /*   By: ppajot <ppajot@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/23 17:50:00 by ppajot            #+#    #+#             */
-/*   Updated: 2022/06/29 23:15:18 by ppajot           ###   ########.fr       */
+/*   Updated: 2022/07/02 19:15:59 by ppajot           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,15 +24,12 @@ static int	stdin_to_pipe(t_data data)
 		newfd = dup(data.pfd[0][1]);
 		close_all_fd(data);
 		str = get_next_line(0);
-		ft_printf("test >> here >>%s", str);
 		while (ft_strcmp(str, data.lim) != 10)
 		{		
 			write(newfd, str, ft_strlen(str));
 			free(str);
 			str = get_next_line(0);
-			ft_printf("test >> here >>%s", str);
 		}
-		ft_printf("\nlim == %s\n", data.lim);
 		free(str);
 		free_data(data);
 		close (newfd);

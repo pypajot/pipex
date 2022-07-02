@@ -6,7 +6,7 @@
 /*   By: ppajot <ppajot@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/20 20:09:03 by ppajot            #+#    #+#             */
-/*   Updated: 2022/06/29 22:21:11 by ppajot           ###   ########.fr       */
+/*   Updated: 2022/07/02 18:06:59 by ppajot           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,6 +24,7 @@
 # define CMD_NOT_FOUND 1
 # define NO_SUCH_FILE 2
 # define NOT_ENOUGH_ARG 3
+# define INVALID_ARG 4
 
 typedef struct s_cmd
 {

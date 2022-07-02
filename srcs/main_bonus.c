@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   main.c                                             :+:      :+:    :+:   */
+/*   main_bonus.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: ppajot <ppajot@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/06/20 20:01:04 by ppajot            #+#    #+#             */
-/*   Updated: 2022/07/02 18:05:52 by ppajot           ###   ########.fr       */
+/*   Created: 2022/07/02 18:03:10 by ppajot            #+#    #+#             */
+/*   Updated: 2022/07/02 18:07:30 by ppajot           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,9 +16,17 @@ int	main(int ac, char **av, char **envp)
 {
 	t_data	data;
 
-	if (ac != 5)
+	if (ac < 5)
 		return (ft_error(NOT_ENOUGH_ARG, 0), 0);
-	data.hd = 0;
+	if (ft_strcmp(av[1], "here_doc"))
+		data.hd = 0;
+	else
+	{
+		if (ac < 6)
+			return (ft_error(NOT_ENOUGH_ARG, 0), 0);
+		data.hd = 1;
+		data.lim = av[2];
+	}
 	if (!init_data(&data, ac, av, envp))
 		return (0);
 	run_all_cmd(data, envp);

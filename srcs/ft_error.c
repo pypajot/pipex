@@ -6,7 +6,7 @@
 /*   By: ppajot <ppajot@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/23 19:05:14 by ppajot            #+#    #+#             */
-/*   Updated: 2022/06/25 16:53:26 by ppajot           ###   ########.fr       */
+/*   Updated: 2022/07/02 18:13:41 by ppajot           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,5 +22,7 @@ char	*ft_error(int err, char *str)
 	}
 	if (err == NOT_ENOUGH_ARG)
 		write(2, "not enough arguments\n", 21);
+	if (err == INVALID_ARG)
+		write(2, "invalid argument\n", 17);
 	return (0);
 }

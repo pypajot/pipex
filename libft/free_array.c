@@ -6,7 +6,7 @@
 /*   By: ppajot <ppajot@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/22 18:14:33 by ppajot            #+#    #+#             */
-/*   Updated: 2022/06/23 21:52:27 by ppajot           ###   ########.fr       */
+/*   Updated: 2022/07/07 19:37:39 by ppajot           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,7 @@ void	free_array(char **array)
 	int	i;
 
 	i = -1;
-	while (array[++i])
+	while (array != 0 && array[++i])
 		free(array[i]);
 	free(array);
 }

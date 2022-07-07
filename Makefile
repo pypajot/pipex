@@ -8,11 +8,11 @@ FLAGS := -Wall -Wextra -Werror
 SRCDIR := srcs
 OBJDIR := objs
 
-SRCS_ := close_all_fd.c  free_data.c  get_path.c  init_data.c  main.c \
+SRCS_ := close_all_fd.c  free_data.c  exec_cmd.c  init_data.c  main.c \
 run_all_cmd.c ft_error.c
 SRCS := $(patsubst %,$(SRCDIR)/%,$(SRCS_))
 
-SRCS_BONUS_ := close_all_fd.c  free_data.c  get_path.c  init_data.c  main_bonus.c \
+SRCS_BONUS_ := close_all_fd.c  free_data.c  exec_cmd.c  init_data.c  main_bonus.c \
 run_all_cmd.c ft_error.c
 SRCS_BONUS := $(patsubst %,$(SRCDIR)/%,$(SRCS_))
 

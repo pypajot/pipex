@@ -6,7 +6,7 @@
 /*   By: ppajot <ppajot@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/23 17:50:00 by ppajot            #+#    #+#             */
-/*   Updated: 2022/07/02 22:33:11 by ppajot           ###   ########.fr       */
+/*   Updated: 2022/07/07 20:37:19 by ppajot           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,13 +50,12 @@ static int	run_cmd_in(t_data data, char **envp)
 		dup2(data.fd1, 0);
 		dup2(data.pfd[0][1], 1);
 		close_all_fd(data);
-		/*if (data.cmd_arr[0].path == 0 || data.fd1 < 0)
+		if (data.fd1 < 0)
 		{
 			free_data(data);
 			exit (0);
-		}*/
+		}
 		exec_cmd(data.cmd_arr[0].av[0], data.cmd_arr[0].av, envp);
-		/*execve(data.cmd_arr[0].path, data.cmd_arr[0].av, envp);*/
 		free_data(data);
 		exit (0);
 	}
@@ -75,23 +74,15 @@ static int	run_cmd_i(t_data data, int i, char **envp)
 		dup2(data.pfd[i % 2][0], 0);
 		dup2(data.pfd[(i + 1) % 2][1], 1);
 		close_all_fd(data);
-		/*if (data.cmd_arr[i + 1 - data.hd].path == 0)
-		{
-			free_data(data);
-			exit (0);
-		}*/
-		exec_cmd(data.cmd_arr[i + 1 - data.hd].av[0], data.cmd_arr[i + 1 - data.hd].av, envp);
-		/*execve(data.cmd_arr[i + 1 - data.hd].path,
-			data.cmd_arr[i + 1 - data.hd].av, envp);*/
+		exec_cmd(data.cmd_arr[i + 1 - data.hd].av[0],
+			data.cmd_arr[i + 1 - data.hd].av, envp);
 		free_data(data);
 		exit (0);
 	}
 	if (cpid < 0)
 		perror("");
-	//if (!data.hd)
-		close(data.pfd[i % 2][0]);
-	//if (!data.hd)
-		close(data.pfd[i % 2][1]);
+	close(data.pfd[i % 2][0]);
+	close(data.pfd[i % 2][1]);
 	return (cpid);
 }
 
@@ -105,14 +96,8 @@ static int	run_cmd_out(t_data data, int i, char **envp)
 		dup2(data.pfd[i % 2][0], 0);
 		dup2(data.fd2, 1);
 		close_all_fd(data);
-		/*if (data.cmd_arr[i + 1 - data.hd].path == 0)
-		{
-			free_data(data);
-			exit (0);
-		}*/
-		exec_cmd(data.cmd_arr[i + 1 - data.hd].av[0], data.cmd_arr[i + 1 - data.hd].av, envp);
-		/*execve(data.cmd_arr[i + 1 - data.hd].path,
-			data.cmd_arr[i + 1 - data.hd].av, envp);*/
+		exec_cmd(data.cmd_arr[i + 1 - data.hd].av[0],
+			data.cmd_arr[i + 1 - data.hd].av, envp);
 		free_data(data);
 		exit (0);
 	}

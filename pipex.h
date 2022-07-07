@@ -6,7 +6,7 @@
 /*   By: ppajot <ppajot@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/20 20:09:03 by ppajot            #+#    #+#             */
-/*   Updated: 2022/07/02 22:06:53 by ppajot           ###   ########.fr       */
+/*   Updated: 2022/07/07 20:37:35 by ppajot           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,7 +57,7 @@ int		ft_printf(const char *format, ...);
 
 char	*get_next_line(int fd);
 
-void	exec_cmd(char *cmd,char **av, char **envp);
+void	exec_cmd(char *cmd, char **av, char **envp);
 
 char	*get_path(char *cmd, char **envp);
 

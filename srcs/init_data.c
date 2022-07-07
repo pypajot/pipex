@@ -6,7 +6,7 @@
 /*   By: ppajot <ppajot@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/23 17:48:19 by ppajot            #+#    #+#             */
-/*   Updated: 2022/07/02 22:08:21 by ppajot           ###   ########.fr       */
+/*   Updated: 2022/07/07 20:37:25 by ppajot           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,7 +28,7 @@ static int	check_alloc(t_data data)
 	return (1);
 }
 
-static void	alloc_data(t_data *data, char **av/*, char **envp*/)
+static void	alloc_data(t_data *data, char **av)
 {
 	int	i;
 
@@ -38,18 +38,7 @@ static void	alloc_data(t_data *data, char **av/*, char **envp*/)
 	while (++i < data->cmd_nbr)
 	{
 		if (data->cmd_arr != 0)
-		{
 			data->cmd_arr[i].av = ft_split(av[i + 2 + data->hd], ' ');
-			/*if (data->cmd_arr[i].av != 0)
-			{
-				data->cmd_arr[i].path = get_path(data->cmd_arr[i].av[0], envp);
-				if (data->cmd_arr[i].path != 0)
-				{
-					free(data->cmd_arr[i].av[0]);
-					data->cmd_arr[i].av[0] = data->cmd_arr[i].path;
-				}
-			}	*/	
-		}
 	}
 }
 
